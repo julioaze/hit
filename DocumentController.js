@@ -143,38 +143,42 @@ class DocumentController {
 
     docTemp.loadZip(zip)
 
-    docTemp.setData({
-      number: contract.number,
-      locale: addresses[0].city,
-      date: moment(contract.created_at).format('DD/MM/YYYY'),
-      trading_name: company.trading_name,
-      responsable: contacts[0].name,
-      items_recurrent: itemsRecurrent,
-      sms_due_day: contract.sms_due_day,
-      sms_due_date: moment(contract.sms_due_date).format('DD/MM/YYYY'),
-      base_date: moment(contract.created_at).format('MM'),
-      scs_total_final: this.formatPrice(parseFloat(scsTotalFinal)),
-      sms_total_final: this.formatPrice(parseFloat(smsTotalFinal)),
-      items_unique: itemsUnique,
-      scs_due_dates: dueDates,
-      accountCompanyName: account.company_name,
-      accountDocument: account.document,
-      accountContactPhone: contacts[0].phone,
-      accountWebSite: account.website,
-      accountAddressStreet: addresses[0].street,
-      accountAddressState: addresses[0].state,
-      accountAddressPostalCode: addresses[0].postal_code,
-      responsableMail: contacts[0].email,
-      responsableFinan: contacts[1].name,
-      responsableFinanPhone: contacts[1].phone,
-      responsableFinanMail: contacts[1].email,
-      responsableTec: contacts[2].name,
-      responsableTecPhone: contacts[2].phone,
-      responsableTecMail: contacts[2].email,
-      deploymentDate: moment(contract.deployment_date).format('DD/MM/YYYY'),
-      grace_period: contract.grace_period,
-      pdf_url: ''
-    })
+    try {
+      docTemp.setData({
+        number: contract.number,
+        locale: addresses[0].city,
+        date: moment(contract.created_at).format('DD/MM/YYYY'),
+        trading_name: company.trading_name,
+        responsable: contacts[0].name,
+        items_recurrent: itemsRecurrent,
+        sms_due_day: contract.sms_due_day,
+        sms_due_date: moment(contract.sms_due_date).format('DD/MM/YYYY'),
+        base_date: moment(contract.created_at).format('MM'),
+        scs_total_final: this.formatPrice(parseFloat(scsTotalFinal)),
+        sms_total_final: this.formatPrice(parseFloat(smsTotalFinal)),
+        items_unique: itemsUnique,
+        scs_due_dates: dueDates,
+        accountCompanyName: account.company_name,
+        accountDocument: account.document,
+        accountContactPhone: contacts[0].phone,
+        accountWebSite: account.website,
+        accountAddressStreet: addresses[0].street,
+        accountAddressState: addresses[0].state,
+        accountAddressPostalCode: addresses[0].postal_code,
+        responsableMail: contacts[0].email,
+        responsableFinan: contacts[1].name,
+        responsableFinanPhone: contacts[1].phone,
+        responsableFinanMail: contacts[1].email,
+        responsableTec: contacts[2].name,
+        responsableTecPhone: contacts[2].phone,
+        responsableTecMail: contacts[2].email,
+        deploymentDate: moment(contract.deployment_date).format('DD/MM/YYYY'),
+        grace_period: contract.grace_period,
+        pdf_url: ''
+      })
+    } catch (error) {
+      console.log(error)
+    }
 
     try {
       docTemp.render()
